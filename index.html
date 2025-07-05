@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <a href="../index.html" style="position:absolute;left:24px;top:24px;background:#fff;color:#22223b;padding:0.5rem 1.2rem;border-radius:1rem;text-decoration:none;box-shadow:0 2px 8px rgba(34,34,59,0.08);font-size:1rem;z-index:1000;transition:background 0.2s;">← Back to Games</a>
+    <a href="../../index.html" style="position:absolute;left:24px;top:24px;background:#fff;color:#22223b;padding:0.5rem 1.2rem;border-radius:1rem;text-decoration:none;box-shadow:0 2px 8px rgba(34,34,59,0.08);font-size:1rem;z-index:1000;transition:background 0.2s;">← Back to Games</a>
     <div id="welcome-overlay" class="welcome-overlay">
       <div class="welcome-modal">
         <button class="welcome-close" id="welcome-close" aria-label="Close">&times;</button>
@@ -22,10 +22,9 @@
     </div>
     <div class="container">
         <header>
-            <div class="logo-title-row">
+            <div class="logo-title-row" style="justify-content: center;">
                 <img src="numberle-logo.svg" alt="Numberle logo" class="numberle-logo">
                 <h1>Numberle</h1>
-                <button id="replay-btn" class="replay-btn" title="Restart Game">&#x1F501;</button>
             </div>
             <p class="subtitle">Guess the 5-digit number in 6 tries</p>
         </header>
@@ -52,10 +51,12 @@
         <div id="endgame-overlay" class="endgame-overlay">
             <div class="endgame-modal">
                 <div class="endgame-content">
-                    <h2 class="endgame-title" id="endgame-title"></h2>
+                    <h2 class="endgame-title" id="endgame-title">Game Over</h2>
                     <p class="endgame-message" id="endgame-message"></p>
-                    <button class="playagain-btn" id="playagain-btn">Play Again</button>
-                    <button class="endgame-close" id="endgame-close">Close</button>
+                    <div class="endgame-buttons">
+                        <button class="playagain-btn" id="playagain-btn">Play Again</button>
+                        <button class="backhome-btn" id="backhome-btn">Back to Games</button>
+                    </div>
                 </div>
             </div>
         </div>
