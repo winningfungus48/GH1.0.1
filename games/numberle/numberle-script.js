@@ -42,8 +42,21 @@ const endgameOverlay = document.getElementById('endgame-overlay');
 const endgameTitle = document.getElementById('endgame-title');
 const endgameMessage = document.getElementById('endgame-message');
 const playagainBtn = document.getElementById('playagain-btn');
-const endgameClose = document.getElementById('endgame-close');
-const replayBtn = document.getElementById('replay-btn');
+const backHomeBtn = document.getElementById('backhome-btn');
+
+const winPrompts = [
+  'Great Job!',
+  'Awesome!',
+  'You did it!',
+  'Impressive!',
+  'Fantastic!',
+  'Well done!',
+  'You cracked it!',
+  'Brilliant!',
+  'Superb!',
+  'You nailed it!'
+];
+let winPromptIndex = 0;
 
 function showWelcomeModal() {
     welcomeOverlay.classList.remove('hide');
@@ -62,14 +75,15 @@ welcomePlay.addEventListener('click', hideWelcomeModal);
 welcomeClose.addEventListener('click', hideWelcomeModal);
 
 function showEndgameModal(won) {
+    console.log('showEndgameModal called, won:', won);
     endgameOverlay.classList.add('show');
     endgameOverlay.classList.remove('hide');
+    endgameTitle.textContent = 'Game Over';
     if (won) {
-        endgameTitle.textContent = `You solved the number in ${gameState.currentRow + 1} tries!`;
-        endgameMessage.textContent = '';
+        endgameMessage.textContent = winPrompts[winPromptIndex];
+        winPromptIndex = (winPromptIndex + 1) % winPrompts.length;
     } else {
-        endgameTitle.textContent = 'Game Over!';
-        endgameMessage.textContent = `The Numberle was ${gameState.secretNumber}.`;
+        endgameMessage.innerHTML = 'The Numberle was:<br><span class="endgame-number">' + gameState.secretNumber + '</span>';
     }
 }
 
@@ -81,14 +95,6 @@ function hideEndgameModal() {
     }, 300);
 }
 
-endgameClose.addEventListener('click', hideEndgameModal);
-playagainBtn.addEventListener('click', () => {
-    hideEndgameModal();
-    setTimeout(() => startNewGame(), 350);
-});
-replayBtn.addEventListener('click', () => {
-    startNewGame();
-});
 
 function startNewGame() {
     resetGameState();
@@ -539,6 +545,13 @@ window.addEventListener('DOMContentLoaded', () => {
     showWelcomeModal();
     // Game will still initialize, but user can't interact until modal is closed
     setDifficulty();
+    playagainBtn.addEventListener('click', () => {
+        hideEndgameModal();
+        setTimeout(() => startNewGame(), 350);
+    });
+    backHomeBtn.addEventListener('click', () => {
+        window.location.href = '../../index.html';
+    });
 });
 
 // Allow Enter key to close welcome modal
@@ -566,11 +579,4 @@ function setDifficulty() {
 // On load, always start daily challenge
 window.addEventListener('DOMContentLoaded', () => {
     setDifficulty();
-});
-
-// 1. Enter key triggers Play Again when modal is open
-window.addEventListener('keydown', (e) => {
-    if (endgameOverlay.classList.contains('show') && (e.key === 'Enter' || e.key === 'NumpadEnter')) {
-        if (!playagainBtn.disabled) playagainBtn.click();
-    }
 }); 

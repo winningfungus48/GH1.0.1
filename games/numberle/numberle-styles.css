@@ -655,8 +655,9 @@ h1 {
   opacity: 1;
 }
 .endgame-overlay.show {
-  display: flex;
-  opacity: 1;
+  display: flex !important;
+  opacity: 1 !important;
+  z-index: 9999 !important;
 }
 .endgame-overlay.hide {
   opacity: 0;
@@ -753,7 +754,7 @@ h1 {
 .replay-btn:hover, .replay-btn:focus {
   color: #111;
 }
-.playagain-btn {
+.playagain-btn, .backhome-btn {
   background: #10b981;
   color: white;
   border: none;
@@ -762,10 +763,31 @@ h1 {
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 18px;
+  margin-bottom: 0;
   transition: background 0.18s;
   font-family: inherit;
+  min-width: 160px;
+  text-align: center;
+  display: inline-block;
 }
-.playagain-btn:hover, .playagain-btn:focus {
+.playagain-btn:hover, .playagain-btn:focus,
+.backhome-btn:hover, .backhome-btn:focus {
   background: #059669;
+}
+.endgame-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 2px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  text-align: center;
+}
+.endgame-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
 } 
